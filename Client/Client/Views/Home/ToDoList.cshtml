@@ -1,0 +1,22 @@
+﻿
+@{
+  ViewBag.Title = "ToDoList";
+}
+<div class="col-12" ng-controller="ctrl">
+    <div class="col-3 to-do-form">
+        <textarea name="message" ng-model="Text" placeholder="Enter your task" id="" cols="30" rows="6"></textarea>
+        <input type="button" value="Add to List" ng-click="AddTask()" />
+    </div>
+    <div class="col-6 task-container">
+        <h2>Your Tasks</h2>
+        <div ng-repeat="task in tasks track by $index">
+            <p>{{$index}}</p>
+            <p>{{taskText}}</p>
+            <p>{{taskCompleted}}</p>
+        </div>      
+    </div>
+    <div class="col-3 id-container">
+        <h3>Your Id</h3>
+        <h3 class="userId" ng-model="userId">@ViewBag.Id</h3>
+    </div>
+</div>

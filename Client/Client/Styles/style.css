@@ -1,0 +1,97 @@
+﻿*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family: 'El Messiri', sans-serif;
+}
+h1,h2,h3,h4,h5,h6,a {
+    font-family:'Lobster', cursive;
+    text-align:center;
+    color:white;
+    margin:1em 0;
+}
+body{
+    background-image:url(/Content/anr.jpg);
+    background-size:cover;
+}
+[class*="col-"] {
+    float: left;
+    padding:1px;
+}
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+body{
+	height: 900px;
+}
+
+@media only screen and (min-width: 768px) {
+    /* For desktop: */
+    .col-1 {width: 8.33%;}
+    .col-2 {width: 16.66%;}
+    .col-3 {width: 25%;}
+    .col-4 {width: 33.33%;}
+    .col-5 {width: 41.66%;}
+    .col-6 {width: 50%;}
+    .col-7 {width: 58.33%;}
+    .col-8 {width: 66.66%;}
+    .col-9 {width: 75%;}
+    .col-10 {width: 83.33%;}
+    .col-11 {width: 91.66%;}
+    .col-12 {width: 100%;}
+}
+h1{
+    font-size:3em;
+}
+ h2{
+    font-size:2.5em;
+}
+ .to-do-form{
+     height:100vh;
+     border-right:1px solid white;
+     position:fixed;
+ }
+ a, input, textarea{
+    width:100%;
+    text-align:center;
+    margin:1em 0;
+    font-size:1.25em;
+    background:none;
+    color:white;
+    border:2px solid white;
+}
+.to-do-form a,.to-do-form input, .to-do-form textarea{
+    margin-left:1em;
+    margin-right:1em;
+    width:80%;
+}
+.container{
+    margin: 4em 37%;
+}
+
+.task-container{
+    margin-left:25%;
+    margin-right:25%;
+    background-color:white;
+    height:100%;
+}
+.task-container h2{
+    color:darkgray;
+}
+textarea::-moz-placeholder { color: white; }
+textarea::-webkit-input-placeholder { color: white; }
+.userId{
+    font-size:2.5em;
+
+}
+.id-container{
+    position: fixed;
+    top: 0.1em;
+    right: 6em;
+}
+.id-container h3{
+    font-size:2em;
+}

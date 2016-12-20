@@ -1,0 +1,12 @@
+﻿@{
+  ViewBag.Title = "Login page";
+}
+
+<div class=" col-3 container" ng-controller="ctrl2">
+    <h1>Your personal ToDo list</h1>
+    <input type="text" name="Id" placeholder=" Your Id" ng-model="LoginId" />
+    <input type="button" value="Enter with existing Id" ng-click="CheckId(LoginId)" />
+    <input type="button" value="Register new User" ng-click="CreateUser()" />
+</div>
+
+
