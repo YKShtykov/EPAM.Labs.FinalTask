@@ -9,7 +9,7 @@ using System.Web;
 
 namespace Client.Infrustructure
 {
-  public class UserService : IUserService
+  public class UserProxyService : IUserService
   {
     private readonly string useridUrl = "http://localhost:51341/api/UserId/";
     private const string GetAllUrl = "Get?userId={0}";

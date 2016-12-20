@@ -9,6 +9,9 @@
                 CreateUser: function () {
                     return $http.get('/Home/CreateUser/');
                 },
+                Logout: function(){
+                    return $http.get('/Home/Logout/');
+                },
                 getAll: function () {
                     return $http.get('/api/Task');
                 },
@@ -29,8 +32,14 @@
     ])
     .controller('ctrl',[
     '$scope',
+    '$window',
     'Connector',
-    function ($scope, Connector) {
+    function ($scope, $window, Connector) {
+        $scope.Logout = function () {
+            Connector.Logout().then(function () {
+                $window.location.href = '/Home/Index'
+            })
+        };
         $scope.AddTask = function () {
             Connector.Save({
                 Id: 0,
@@ -57,7 +66,7 @@
             Connector.Delete($scope.id).then(function () {
                 $scope.update()
             });
-        };
+        };        
         //$scope.update();
     }])
 .controller('ctrl2', [
