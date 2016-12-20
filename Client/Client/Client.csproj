@@ -156,7 +156,9 @@
     </Compile>
     <Compile Include="Infrustructure\ClientManager.cs" />
     <Compile Include="Infrustructure\NinjectWebCommon.cs" />
+    <Compile Include="Infrustructure\UserService.cs" />
     <Compile Include="Interfaces\IRequestManager.cs" />
+    <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Interfaces\NinjectDipendencyResolver.cs" />
     <Compile Include="Models\TaskViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

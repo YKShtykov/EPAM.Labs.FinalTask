@@ -58,7 +58,7 @@
                 $scope.update()
             });
         };
-        $scope.update();
+        //$scope.update();
     }])
 .controller('ctrl2', [
     '$scope',
