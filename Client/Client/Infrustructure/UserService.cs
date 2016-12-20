@@ -16,13 +16,19 @@ namespace Client.Infrustructure
 
     public int CreateUser()
     {
-    string dataAsString = null;
+      string dataAsString = null;
       using (var client = new HttpClient())
       {
-        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        dataAsString = client.GetStringAsync(useridUrl + GetAllUrl).Result;
-        var a = HttpContext.Current.Response.Cookies;
-        return JsonConvert.DeserializeObject<int>(dataAsString);
+        //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        //dataAsString = client.GetStringAsync(useridUrl + GetAllUrl).Result;
+
+        int result = 32;//JsonConvert.DeserializeObject<int>(dataAsString);
+
+        var c = new HttpCookie("user",result.ToString());
+        c.Expires = DateTime.Now.AddDays(1);
+        HttpContext.Current.Response.Cookies.Add(c);
+
+        return result;
       }
     }
 
@@ -34,7 +40,7 @@ namespace Client.Infrustructure
         return -1;
 
       return userId;
-      }
+    }
 
     public bool LogIn(int UserId)
     {
@@ -48,12 +54,10 @@ namespace Client.Infrustructure
       if (userCookie == null || !int.TryParse(userCookie.Value, out userId))
         return;
 
-      if (HttpContext.Current.Request.Cookies["user"] != null)
-      {
-        var c = new HttpCookie("user");
-        c.Expires = DateTime.Now.AddDays(-1);
-        HttpContext.Current.Response.Cookies.Add(c);
-      }
+      var c = new HttpCookie("user");
+      c.Expires = DateTime.Now.AddDays(-1);
+      HttpContext.Current.Response.Cookies.Add(c);
+
     }
   }
 }

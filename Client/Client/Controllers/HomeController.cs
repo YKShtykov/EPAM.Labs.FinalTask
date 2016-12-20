@@ -9,7 +9,7 @@ namespace Client.Controllers
 {
   public class HomeController : Controller
   {
-    private ClientManager manager = new ClientManager();
+    private UserService manager = new UserService();
     // GET: Home
     public ActionResult Index()
     {
@@ -27,7 +27,7 @@ namespace Client.Controllers
     }
     public ActionResult CreateUser()
     {
-      int id = 32;// manager.GetId();
+      int id =  manager.CreateUser();
       return Json(new {id}, JsonRequestBehavior.AllowGet);
     }
   }
