@@ -1,58 +1,50 @@
-﻿using Client.Interfaces;
+﻿using Proxy.Web.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Client.Models;
-using System.Net.Http;
+using Proxy.Web.Models;
 using System.Configuration;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
-using System.Net;
 
-namespace Client.Infrustructure
+namespace Proxy.Web.Infrustructure
 {
-    public class ProxyRequestManager : IRequestManager
+    /// <summary>
+    /// Works with ToDo backend.
+    /// </summary>
+    public class ProxyManager : IRequestManager
     {
         /// <summary>
         /// The service URL.
         /// </summary>
-        private readonly string serviceApiUrl = ConfigurationManager.AppSettings["ProxyUrl"];
+        private readonly string serviceApiUrl = ConfigurationManager.AppSettings["ToDoServiceUrl"];
 
         /// <summary>
-        /// The url for getting all tasks.
+        /// The url for getting all todos.
         /// </summary>
-        private const string GetAllUrl = "task?userId=";
+        private const string GetAllUrl = "ToDos?userId={0}";
 
         /// <summary>
-        /// The url for updating a tasks.
+        /// The url for updating a todo.
         /// </summary>
-        private const string UpdateUrl = "task/put/";
-
+        private const string UpdateUrl = "ToDos";
 
         /// <summary>
-        /// The url for a tasks creation.
+        /// The url for a todo's creation.
         /// </summary>
-        private const string CreateUrl = "task/post/";
-
+        private const string CreateUrl = "ToDos";
 
         /// <summary>
-        /// The url for a tasks deletion.
+        /// The url for a todo's deletion.
         /// </summary>
-        private const string DeleteUrl = "task/delete/";
-
-
-        private readonly HttpClient httpClient;
-        public ProxyRequestManager()
-        {
-            httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        }
+        private const string DeleteUrl = "ToDos/{0}";
 
         /// <summary>
-        /// Deletes a task.
+        /// Deletes a todo.
         /// </summary>
-        /// <param name="id">The task Id to delete.</param>
+        /// <param name="id">The todo Id to delete.</param>
         public void Delete(int taskId)
         {
             try
@@ -60,19 +52,18 @@ namespace Client.Infrustructure
                 using (var httpClient = new HttpClient())
                 {
                     httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    string urlStr = serviceApiUrl + DeleteUrl + taskId;
-                    httpClient.DeleteAsync(string.Format(urlStr))
-                          .Result.EnsureSuccessStatusCode();
+                    httpClient.DeleteAsync(string.Format(serviceApiUrl + DeleteUrl, taskId))
+                        .Result.EnsureSuccessStatusCode();
                 }
             }
             catch (Exception ex)
             {
-                throw;
+
             }
         }
 
         /// <summary>
-        /// Gets all tasks for the user.
+        /// Gets all todos for the user.
         /// </summary>
         /// <param name="userId">The User Id.</param>
         /// <returns>The list of todos.</returns>
@@ -84,8 +75,7 @@ namespace Client.Infrustructure
                 using (var httpClient = new HttpClient())
                 {
                     httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    string urlStr = serviceApiUrl + GetAllUrl + userId;
-                    dataAsString = httpClient.GetStringAsync(urlStr).Result;
+                    dataAsString = httpClient.GetStringAsync(string.Format(serviceApiUrl + GetAllUrl, userId)).Result;
                     return JsonConvert.DeserializeObject<IList<ToDoItemViewModel>>(dataAsString);
                 }
             }
@@ -97,7 +87,7 @@ namespace Client.Infrustructure
         }
 
         /// <summary>
-        /// Creates a task. UserId is taken from the model.
+        /// Creates a todo. UserId is taken from the model.
         /// </summary>
         /// <param name="item">The todo to create.</param>
         public void Post(ToDoItemViewModel task)
@@ -106,14 +96,13 @@ namespace Client.Infrustructure
             {
                 using (var httpClient = new HttpClient())
                 {
-                    httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    string urlStr = serviceApiUrl + CreateUrl;
-                    httpClient.PostAsJsonAsync(urlStr,task).Result.EnsureSuccessStatusCode();
+                    httpClient.PostAsJsonAsync(serviceApiUrl + CreateUrl, task)
+                        .Result.EnsureSuccessStatusCode();
                 }
             }
             catch (Exception ex)
             {
-                throw;
+
             }
         }
 
@@ -127,15 +116,14 @@ namespace Client.Infrustructure
             {
                 using (var httpClient = new HttpClient())
                 {
-                    httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    string urlStr = serviceApiUrl + UpdateUrl;
-                    httpClient.PutAsJsonAsync(urlStr, task).Result.EnsureSuccessStatusCode();
+                    httpClient.PutAsJsonAsync(serviceApiUrl + UpdateUrl, task)
+                        .Result.EnsureSuccessStatusCode();
                 }
             }
             catch (Exception ex)
             {
-                throw;
-            }
-        }
+
+            }            
+        }        
     }
 }

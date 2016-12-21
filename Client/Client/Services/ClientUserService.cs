@@ -22,6 +22,7 @@ namespace Client.Services
 
     private const string CreateUrl1 = "Users";
     private readonly HttpClient httpClient;
+
     public ClientUserService()
     {
       httpClient = new HttpClient();

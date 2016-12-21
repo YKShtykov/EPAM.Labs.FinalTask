@@ -40,7 +40,7 @@ namespace Client.Controllers
       {
         return _RequestManager.Get(userId);
       }
-      catch (Exception)
+      catch (Exception ex)
       {
         return _CloudManager.Get(userId);
       }
@@ -72,7 +72,7 @@ namespace Client.Controllers
       {
         _RequestManager.Delete(id);
       }
-      catch (Exception)
+      catch (Exception ex)
       {
         _CloudManager.Delete(id);
       }
