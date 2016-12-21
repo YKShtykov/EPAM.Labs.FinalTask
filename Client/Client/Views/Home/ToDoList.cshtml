@@ -12,9 +12,15 @@
     <div class="col-6 task-container">
         <h2>Your Tasks</h2>
         <div ng-repeat="task in tasks track by $index">
-            <p>{{$index}}</p>
-            <p>{{taskText}}</p>
-            <p>{{taskCompleted}}</p>
+            <div class=" col-10 task">
+                <span>{{$index}}</span><span>{{task.taskText}}</span>
+                <i class="ion-close-round" ng-click="Delete(task.taskId)"></i>
+                <i class="ion-checkmark" ng-show="task.taskCompleted"></i>
+                
+            </div>
+            <p></p>
+            <p></p>
+            <p></p>
         </div>      
     </div>
     <div class="col-3 id-container">

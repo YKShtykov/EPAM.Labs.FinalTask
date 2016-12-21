@@ -1,4 +1,6 @@
 ﻿using Client.Infrustructure;
+using Client.Interfaces;
+using Client.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,15 @@ namespace Client.Controllers
 {
   public class HomeController : Controller
   {
-    private ClientUserService manager = new ClientUserService();
+    //private readonly IUserService _service;
+
+    //public HomeController(IUserService service)
+    //{
+    //    _service = service;
+    //}
+
+    private readonly ClientUserService _service = new ClientUserService();
+
     // GET: Home
     public ActionResult Index()
     {
@@ -23,18 +33,24 @@ namespace Client.Controllers
     }
     public ActionResult CheckId(int id)
     {
-      return Json(new { });
+      bool register = _service.Login(id);
+      if (register)
+      {
+        return Json(new { id }, JsonRequestBehavior.AllowGet);
+      }
+      else
+        return RedirectToAction("Index");
     }
     public ActionResult CreateUser()
     {
-      int id =  manager.CreateUser();
-      return Json(new {id}, JsonRequestBehavior.AllowGet);
+      int id = _service.GetOrCreateUser();//_service.CreateUser("baba");
+      return Json(new { id }, JsonRequestBehavior.AllowGet);
     }
 
-    public ActionResult Logout()
+    public ActionResult Logout(int id)
     {
-      manager.Logout();
-      return Json(new { data=true }, JsonRequestBehavior.AllowGet);
+      _service.Logout(id);
+      return Json(new { data = true }, JsonRequestBehavior.AllowGet);
     }
   }
 }

@@ -12,39 +12,41 @@ using System.Net;
 
 namespace Client.Infrustructure
 {
-  public class ClientManager : IRequestManager
+  public class ProxyRequestManager : IRequestManager
   {
     /// <summary>
     /// The service URL.
     /// </summary>
     private readonly string serviceApiUrl = ConfigurationManager.AppSettings["ProxyUrl"];
-    private readonly string useridUrl = "http://localhost:51341/api/UserId/";
+
     /// <summary>
     /// The url for getting all tasks.
     /// </summary>
-    private const string GetAllUrl = "Get?userId={0}";
+    private const string GetAllUrl = "Get";
 
     /// <summary>
     /// The url for updating a tasks.
     /// </summary>
     private const string UpdateUrl = "Put";
 
+
     /// <summary>
     /// The url for a tasks creation.
     /// </summary>
     private const string CreateUrl = "Post";
+
 
     /// <summary>
     /// The url for a tasks deletion.
     /// </summary>
     private const string DeleteUrl = "Delete/{0}";
 
-    //   private readonly HttpClient httpClient;
 
-    public ClientManager()
+    private readonly HttpClient httpClient;
+    public ProxyRequestManager()
     {
-      // httpClient = new HttpClient();
-      //    httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+      httpClient = new HttpClient();
+      httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
     }
 
     /// <summary>
@@ -64,7 +66,7 @@ namespace Client.Infrustructure
       }
       catch (Exception ex)
       {
-
+        throw;
       }
     }
 
@@ -85,19 +87,18 @@ namespace Client.Infrustructure
           using (var client = new HttpClient(handler) { BaseAddress = baseAddress })
           {
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            cookieContainer.Add(new Uri(serviceApiUrl + GetAllUrl), new Cookie("user", "100"));
+            cookieContainer.Add(new Uri(serviceApiUrl + GetAllUrl), new Cookie("user", userId.ToString()));
             dataAsString = client.GetStringAsync(serviceApiUrl + GetAllUrl).Result;
             var a = HttpContext.Current.Response.Cookies;
             return JsonConvert.DeserializeObject<IList<ToDoItemViewModel>>(dataAsString);
           }
         }
-        
+
       }
       catch (Exception ex)
       {
-
+        throw;
       }
-      return null;
     }
 
     /// <summary>
@@ -116,7 +117,7 @@ namespace Client.Infrustructure
       }
       catch (Exception ex)
       {
-
+        throw;
       }
     }
 
@@ -136,20 +137,7 @@ namespace Client.Infrustructure
       }
       catch (Exception ex)
       {
-
-      }
-    }
-
-    public int GetId()
-    {
-      string dataAsString = null;
-      var baseAddress = new Uri(serviceApiUrl + GetAllUrl);
-      using (var client = new HttpClient())
-      {
-        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        dataAsString = client.GetStringAsync(useridUrl + GetAllUrl).Result;
-        var a = HttpContext.Current.Response.Cookies;
-        return JsonConvert.DeserializeObject<int>(dataAsString);
+        throw;
       }
     }
   }

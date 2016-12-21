@@ -141,8 +141,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\todo.js" />
-    <Content Include="Styles\style.css" />
-    <Content Include="Web.config" />
+    <Content Include="Styles\styl.css" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -154,15 +156,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infrustructure\ClientManager.cs" />
+    <Compile Include="Services\ProxyRequestManager.cs" />
     <Compile Include="Infrustructure\NinjectWebCommon.cs" />
-    <Compile Include="Infrustructure\ProxyUserService.cs" />
-    <Compile Include="Infrustructure\ClientUserService.cs" />
+    <Compile Include="Services\ClientUserService.cs" />
     <Compile Include="Interfaces\IRequestManager.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Interfaces\NinjectDipendencyResolver.cs" />
     <Compile Include="Models\TaskViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CloudRequestManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -9,8 +9,8 @@
                 CreateUser: function () {
                     return $http.get('/Home/CreateUser/');
                 },
-                Logout: function(){
-                    return $http.get('/Home/Logout/');
+                Logout: function(id){
+                    return $http.get('/Home/Logout/'+id);
                 },
                 getAll: function () {
                     return $http.get('/api/Task');
@@ -36,7 +36,7 @@
     'Connector',
     function ($scope, $window, Connector) {
         $scope.Logout = function () {
-            Connector.Logout().then(function () {
+            Connector.Logout($scope.userId).then(function () {
                 $window.location.href = '/Home/Index'
             })
         };
@@ -55,19 +55,19 @@
 
                 responce.data.forEach(function (task, i, array) {
                     $scope.tasks.push({
-                        taskId: task.Id,
-                        taskText: task.Text,
-                        taskCompleted: task.Completed
+                        taskId: task.ToDoId,
+                        taskText: task.Name,
+                        taskCompleted: task.IsCompleted
                     });
                 });
             })
         };
-        $scope.Delete = function () {
-            Connector.Delete($scope.id).then(function () {
+        $scope.Delete = function (id) {
+            Connector.Delete(id).then(function () {
                 $scope.update()
             });
         };        
-        //$scope.update();
+        $scope.update();
     }])
 .controller('ctrl2', [
     '$scope',
@@ -75,7 +75,9 @@
     'Connector',
     function ($scope,$window, Connector) {
         $scope.CheckId = function (id) {
-            Connector.CheckId(id).then(function () { $window.location.href = '/Home/ToDoList' },
+            Connector.CheckId(id).then(function (response) {
+                $window.location.href = '/Home/ToDoList/' + response.data.id
+            },
                 function () { $scope.LoginId = '' });
         };
 

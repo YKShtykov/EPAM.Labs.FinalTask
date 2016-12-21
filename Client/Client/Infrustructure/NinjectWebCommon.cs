@@ -14,6 +14,7 @@ namespace Client
     using WebApiContrib.IoC.Ninject;
     using Client.Interfaces;
     using Client.Infrustructure;
+    using Services;
 
     //using Domain;
 
@@ -69,7 +70,8 @@ namespace Client
         ///// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<IRequestManager>().To<ClientManager>();
+            kernel.Bind<IRequestManager>().To<ProxyRequestManager>();
+            kernel.Bind<IUserService>().To<ClientUserService>();
         }
     }
 }

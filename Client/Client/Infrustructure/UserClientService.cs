@@ -9,7 +9,7 @@ using System.Web;
 
 namespace Client.Infrustructure
 {
-  public class ClientUserService : IUserService
+  public class UserProxyService : IUserService
   {
     private readonly string useridUrl = "http://localhost:51341/api/UserId/";
     private const string GetAllUrl = "Get?userId={0}";
@@ -53,7 +53,7 @@ namespace Client.Infrustructure
       int userId;
       if (userCookie == null || !int.TryParse(userCookie.Value, out userId))
         return;
-       
+
       var c = new HttpCookie("user");
       c.Expires = DateTime.Now.AddDays(-1);
       HttpContext.Current.Response.Cookies.Add(c);
