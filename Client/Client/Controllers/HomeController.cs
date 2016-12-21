@@ -9,7 +9,7 @@ namespace Client.Controllers
 {
   public class HomeController : Controller
   {
-    private UserProxyService manager = new UserProxyService();
+    private ClientUserService manager = new ClientUserService();
     // GET: Home
     public ActionResult Index()
     {

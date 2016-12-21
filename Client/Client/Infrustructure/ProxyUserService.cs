@@ -7,12 +7,12 @@ using System.Web;
 
 namespace Client.Infrustructure
 {
-  public class UserProxyService : IUserService
+  public class ProxyUserService : IUserService
   {
     private readonly HttpClient httpClient;
     private readonly string serviceApiUrl = ConfigurationManager.AppSettings["ToDoServiceUrl"];
     private const string CreateUrl = "Users";
-    public UserProxyService()
+    public ProxyUserService()
     {
       httpClient = new HttpClient();
       httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

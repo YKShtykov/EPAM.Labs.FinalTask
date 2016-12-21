@@ -156,8 +156,8 @@
     </Compile>
     <Compile Include="Infrustructure\ClientManager.cs" />
     <Compile Include="Infrustructure\NinjectWebCommon.cs" />
-    <Compile Include="Infrustructure\UserCloudService.cs" />
-    <Compile Include="Infrustructure\UserProxyService.cs" />
+    <Compile Include="Infrustructure\ProxyUserService.cs" />
+    <Compile Include="Infrustructure\ClientUserService.cs" />
     <Compile Include="Interfaces\IRequestManager.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Interfaces\NinjectDipendencyResolver.cs" />
