@@ -14,6 +14,7 @@ namespace Client.Interfaces
         int CreateUser(string userName);
 
         int GetCurrentUser();
+        //safdhgjdsfsdsdsgfdsgfg
 
     }
 }
