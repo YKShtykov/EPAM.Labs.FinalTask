@@ -40,6 +40,7 @@ namespace Client.Models
         /// <value>
         /// The name.
         /// </value>
+        ///sdfsdfdsfdsfdsfdsfdsf
         public string Name { get; set; }
     }
 }
