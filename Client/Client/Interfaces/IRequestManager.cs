@@ -1,4 +1,4 @@
-﻿using Client.Models;
+using Client.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,19 +11,7 @@ namespace Client.Interfaces
     /// Defines interaction between client/proxy and proxy/cloud
     /// </summary>
     public interface IRequestManager
-    {
-        /// <summary>
-        /// Returns all todo-items for the current user.
-        /// </summary>
-        /// <returns>The list of todo-items.</returns>
-        IList<ToDoItemViewModel> Get(int userId);
-
-        /// <summary>
-        /// Updates the existing todo-item.
-        /// </summary>
-        /// <param name="todo">The todo-item to update.</param>
-        void Put(ToDoItemViewModel task);
-
+    {        
         /// <summary>
         /// Deletes the specified todo-item.
         /// </summary>
